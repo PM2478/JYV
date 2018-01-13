@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#Bootstrap
+gem 'bootstrap', '~> 4.0.0.beta3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -29,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -48,3 +50,28 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#gem jquery for bootstrap
+gem 'jquery-rails'
+
+#Devise
+gem 'devise'
+
+#Gem for font-awesome.
+gem 'font-awesome-sass'
+
+# gem for voting on a model
+gem 'acts_as_votable', '~> 0.11.1'
+
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+  
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+
+  # Use pg for heroku database.
+gem 'pg'
+# Heroku pre-req
+gem 'rails_12factor', group: :production # don't use locally, only on heroku
+
+gem 'therubyracer', platforms: :ruby

@@ -1,0 +1,78 @@
+<link 
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
+<!-- begin row 2. -->
+
+    <div>
+     <%= render '/components/post_form' %>
+    </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <img src="/avatar.png" class="panel-image-preview" >
+           <h6><%= current_user.username %></h6>
+           <h6>Followers</h6>
+           <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.followers.count %></h6>
+          </div>
+        </div>
+
+      <br>
+       <div class="card">
+         <div class="card-body">
+             <p>Trends.</p>
+             <a href="">#Trend #1</a><br>
+                <span style="color: grey;">31k Posts</span><br><br>
+             <a href="">#Trend #2</a><br>
+                <span style="color: grey;">25k Posts</span><br><br>
+             <a href="">#Trend #3</a><br>
+             <span style="color: grey;">16k Posts</span><br><br>
+           </div>
+          </div>
+    </div>
+
+    <div class="col-6">
+        <p>Questions.</p>
+        <% for @p in @posts %>
+      <div class="card">
+        <div class="card-body">
+            <div>
+            <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
+            </div>
+            <div class="col-sm-11">
+              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= @p.content %></p>
+            </div>
+            
+           <div class="col-sm-12">
+              <p class="fontawe-links">
+                 <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-envelope-o" aria-hidden="true"></i>
+                 <a href="">View conversation</a>
+              </p>
+           </div>  
+        </div>
+      </div>
+        <% end  %>
+    </div>
+    
+    <div class="col">
+      <%= render '/components/follow_button', :user => User.find_by_username(params[:id]) %>
+      <div class="card">
+        <div class="card-body">
+               <h5>Who to follow</h5>
+                <% for @u in @toFollow do %>
+                <p><a href="/user/<%= @u.username %>"><%= @u.username %></a></p>
+                <% end %>     
+        </div>
+      </div>
+    </div>
+   </div>
+ 
+     
+
+<a href="#top"><p class="opacity: .7;">Back to top <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></p></a></center>
