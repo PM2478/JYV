@@ -1,9 +1,25 @@
 class PostsController < ApplicationController
-    
+   before_action :set_post, only: [:upvote, :downvote]
    
-
     def new 
         @post = Post.new
+    end
+ 
+           
+    def set_post
+        @post= Post.find(params[:id])
+    end
+      
+    #upvote_from user
+    #downvote_from user
+    def upvote     
+        @post.upvote_from current_user
+        redirect_back(fallback_location: root_path)
+    end
+
+    def downvote
+        @post.downvote_from current_user
+        redirect_back(fallback_location: root_path)
     end
     
     def create
@@ -23,5 +39,6 @@ class PostsController < ApplicationController
     def post_params # allows certain data to be passed via form.
         params.require(:post).permit(:user_id, :content)      
     end
+    
     
 end

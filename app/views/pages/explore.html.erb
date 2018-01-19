@@ -38,18 +38,30 @@
               <p class="post-content"><%= @p.content %></p>
             </div>
             
-            <div class="col-sm-12">
-              <p class="post-links">
-                <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-retweet g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-heart g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span>
-                <a href="">View conversation</a>
+           <div class="col-sm-12">
+              <p class="fontawe-links">              
+                   <%= link_to Yes_post_path(@p.id), method: :put do %>
+                    <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
+                    <%= @p.get_upvotes.size %>
+                    <% end %>
+                    <%= link_to No_post_path(@p.id), method: :put do %>
+                    <i class="fa fa-arrow-down" aria-hidden="true">No</i>
+                    <%= @p.get_downvotes.size %>
+                    <% end %>                     
+                 <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>                    
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
+                 <a href="#"><i style="padding-left:42px;" class="fa fa-envelope-o" aria-hidden="true"></i>
+                 <a href="">View conversation</a>
               </p>
-          </div>
+              
+           </div>  
         </div>
-        <% end %>
+      </div>
+        <% end  %>
+    </div>
         
+
     <div class="col">
       <div class="card">
         <div class="card-body">

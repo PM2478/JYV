@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :relationships, only: [:create, :destroy]
-  resources :posts
+  
+  resources :posts do
+   member do
+    put 'Yes' => 'posts#upvote'
+    put 'No' => 'posts#downvote'
+   end
+  end
+
 
   
   resources :users do

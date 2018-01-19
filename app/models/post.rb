@@ -1,12 +1,19 @@
 class Post < ApplicationRecord
-  
   belongs_to :user
+  acts_as_votable
+  
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 100} # Questions are capped at 100 chars.
   validates :post_is_unique,presence: true
-  order(created_at: :desc)# newest tweets / posts first
+  validates :post_order, presence: true
+  scope :ordered_by_vote, -> { order(cached_votes_score: :DESC) }
+  default_scope { order(cached_votes_score: :DESC) }
+
+  def post_order 
   
-    private
+  end
+
+  private
   
     def post_is_unique
       # Select all posts where the id does not match current id and fetch the contents
