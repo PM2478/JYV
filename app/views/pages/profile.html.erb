@@ -16,6 +16,7 @@
     <div>
      <%= render '/components/post_form' %>
     </div>
+    <%= render '/components/follow_button', :user => User.find_by_username(params[:id])%>
 
 <div class="container">
   <div class="row">
