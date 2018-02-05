@@ -56,7 +56,7 @@
           </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-7">
         <p>Questions.</p>
         <% for @p in @posts %>
       <div class="card">
@@ -80,6 +80,10 @@
                     <%= link_to No_post_path(@p.id), method: :put do %>
                     <i class="fa fa-arrow-down" aria-hidden="true">No</i>
                     <%= @p.get_downvotes.size %>
+                    <%=  line_chart [
+                                     {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
+                                     {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
+                                    ] %> 
                     <% end %>
                                
                     <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>                    
@@ -87,6 +91,7 @@
                     <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
                     <a href="#"><i style="padding-left:42px;" class="fa fa-envelope-o" aria-hidden="true"></i>
                     <a href="">View conversation</a>
+                    
               </p>
            </div>  
         </div>
@@ -107,36 +112,4 @@
    </div>
 
         
-    <% for @p in @posts %>
-      <div class="card">
-        <div class="card-body">
-            <div class="col-sm-1">
-              <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
-            </div>
-            <div class="col-sm-11">
-              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= @p.content %></p>
-            </div>
-            
-           <div class="col-sm-12">
-              <p class="fontawe-links">                   
-                    <%= link_to Yes_post_path(@p.id), method: :put do %>
-                    <a href="#"><i class="fa fa-arrow-up" aria-hidden="true">Yes</i></a>
-                    <%= @p.get_upvotes.size %>
-                    <% end %>
-                    <%= link_to No_post_path(@p.id), method: :put do %>
-                    <a href="#"><i class="fa fa-arrow-down" aria-hidden="true">No</i></a>
-                    <%= @p.get_downvotes.size %>
-                    <% end %>
-                               
-                    <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>                    
-                    <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
-                    <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
-                    <a href="#"><i style="padding-left:42px;" class="fa fa-envelope-o" aria-hidden="true"></i>
-                    <a href="">View conversation</a>
-              </p>
-           </div>  
-        </div>
-      </div>
-        <% end  %>
-    </div>
+   

@@ -1,0 +1,7 @@
+class ChartsController < ApplicationController
+  render json:  [
+  {name: "Yes", data: @p.get_upvotes.size.group_by_day(:created_at).count},
+  {name: "No", data: @p.get_upvotes.size.group_by_day(:created_at).count}
+]
+
+end

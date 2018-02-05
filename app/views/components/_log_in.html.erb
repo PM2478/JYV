@@ -1,4 +1,5 @@
-<%= form_for(:user, :url => session_path(:user)) do |f| %>
+<center><%= form_for(:user, :url => session_path(:user)) do |f| %></center>
+  <center>
   <%= f.text_field :email, autofocus: true  %>
   <%= f.password_field :password %>
   <%= f.check_box :remember_me %>
@@ -6,3 +7,4 @@
   <%= f.submit 'Sign in' %>
   <%= link_to "Forgot your password?", new_password_path(:user) %>
 <% end %>
+</center>

@@ -43,7 +43,7 @@
           </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-9">
         <p>Questions.</p>
         <% for @p in @posts %>
       <div class="card">
@@ -61,14 +61,19 @@
            <div class="col-sm-12">
               <p class="fontawe-links">                   
                     <%= link_to Yes_post_path(@p.id), method: :put do %>
-                    <a href="#"><i class="fa fa-arrow-up" aria-hidden="true">Yes</i></a>
+                    <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
                     <%= @p.get_upvotes.size %>
                     <% end %>
                     <%= link_to No_post_path(@p.id), method: :put do %>
-                    <a href="#"><i class="fa fa-arrow-down" aria-hidden="true">No</i></a>
+                    <i class="fa fa-arrow-down" aria-hidden="true">No</i>
                     <%= @p.get_downvotes.size %>
+                    <%=  line_chart [
+                                     {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
+                                     {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
+                                    ] %> 
                     <% end %>
-                               
+                       
+      
                     <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>                    
                     <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
                     <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
@@ -81,18 +86,8 @@
         <% end  %>
     </div>
     
-    <div class="col">
-      <%= render '/components/follow_button', :user => User.find_by_username(params[:id]) %>
-      <div class="card">
-        <div class="card-body">
-               <h5>Who to follow</h5>
-                <% for @u in @toFollow do %>
-                <p><a href="/user/<%= @u.username %>"><%= @u.username %></a></p>
-                <% end %>     
-        </div>
-      </div>
-    </div>
+    
    </div>
 
    
-
+  
