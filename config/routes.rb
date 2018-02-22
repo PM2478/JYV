@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   
   resources :posts do
+    resources :comments
    member do
     put 'Yes' => 'posts#upvote'
     put 'No' => 'posts#downvote'

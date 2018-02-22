@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131050046) do
+ActiveRecord::Schema.define(version: 20180222094855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.bigint "question_id"
-    t.bigint "voter_id"
+    t.bigint "post_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_comments_on_question_id"
-    t.index ["voter_id"], name: "index_comments_on_voter_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -46,14 +46,6 @@ ActiveRecord::Schema.define(version: 20180131050046) do
     t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.text "body"
-    t.datetime "start"
-    t.datetime "end"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -85,21 +77,6 @@ ActiveRecord::Schema.define(version: 20180131050046) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "vote_records", force: :cascade do |t|
-    t.integer "voter_id"
-    t.integer "question_id"
-    t.boolean "is_yes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "voters", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "votes", id: :serial, force: :cascade do |t|
     t.string "votable_type"
     t.integer "votable_id"
@@ -114,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180131050046) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
-  add_foreign_key "comments", "questions"
-  add_foreign_key "comments", "voters"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
 end

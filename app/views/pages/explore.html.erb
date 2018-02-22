@@ -85,7 +85,11 @@
                                      {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
                                     ] %> 
                     <% end %>
-                               
+                    <%= @p.comments.count%> Comments.
+                    <%= render 'comments/form' %> 
+                    <%= render 'comments/comment' %> 
+
+           
                     <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>                    
                     <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
                     <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
