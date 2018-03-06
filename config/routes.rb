@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   
   resources :posts do
-    resources :comments
-   member do
+    member do
     put 'Yes' => 'posts#upvote'
     put 'No' => 'posts#downvote'
    end
@@ -24,7 +23,8 @@ Rails.application.routes.draw do
    get '/home' => 'pages#home' # override default routes.
    get '/user/:id' => 'pages#profile'
    get '/explore' => 'pages#explore'
-
+   get '/show' => 'pages#show'
+   
   namespace :charts do 
     get "votes"
   end

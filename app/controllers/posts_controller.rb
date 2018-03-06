@@ -4,10 +4,13 @@ class PostsController < ApplicationController
     def new 
         @post = Post.new
     end
- 
-           
+    
     def set_post
         @post= Post.find(params[:id])
+    end
+           
+    def show
+        @post = Post.find(params[:id])
     end
       
     #upvote_from user
@@ -25,13 +28,12 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id # assign the post to the user who created it.
-        respond_to do |f|
-            if (@post.save) 
-                f.html { redirect_to "", notice: "Question created!" }
+       
+            if @post.save
+                redirect_to @post, notice: "Question created!" 
             else
-                f.html { redirect_to "", notice: "Error: Your Question has already been asked!." }
+                redirect_to "", notice: "Error: Your Question has already been asked!." 
             end
-        end
     end
     
     

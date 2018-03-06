@@ -3,6 +3,8 @@ class PagesController < ApplicationController
   def index
   end
 
+  
+
   # back-end code for pages/home
   def home
     following = Array.new
