@@ -6,9 +6,7 @@
                                <p class="post-content"><%= @post.content %></p>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    
 
 <div class="col-sm-12">
   <p class="fontawe-links">                   
@@ -25,4 +23,9 @@
                       ] %> 
       <% end %>
   </p>
+</div>
+
+<div>
+<%= render 'comments/comment' %>
+<%= render 'comments/form' %>
 </div>

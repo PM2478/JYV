@@ -30,9 +30,9 @@ class CommentsController < ApplicationController
       if @comment.update(params[:comment].permit(:content))
         respond_to do |f|
             if (@comment.save) 
-                f.html { redirect_to "/explore", notice: "Comment edited!" }
+                f.html { redirect_to @post, notice: "Comment edited!" }
             elsif
-                f.html { redirect_to "/explore", notice: "Error: Your Comment is the same!." }
+                f.html { redirect_to "", notice: "Error: Your Comment is the same!." }
            else
                render 'edit'
         #f.html { render 'edit'} ## Specify the format in which you are rendering "new" page      

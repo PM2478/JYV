@@ -7,9 +7,14 @@ Rails.application.routes.draw do
     put 'Yes' => 'posts#upvote'
     put 'No' => 'posts#downvote'
    end
-  end
 
-
+resources :comments do
+  member do
+    put 'Like' => 'comments#upvote'
+    put 'Dislike' => 'comments#downvote'
+  end 
+end
+end
   
   resources :users do
     member do
