@@ -3,6 +3,9 @@ class CommentsController < ApplicationController
     before_action :find_comment, only: [:destroy, :update, :edit, :comment_owner ]
     before_action :comment_owner, only: [:destroy, :edit, :update]
      
+      def new
+        
+      end 
 
       def create
         @comment = @post.comments.create(params[:comment].permit(:content))
@@ -30,7 +33,7 @@ class CommentsController < ApplicationController
       if @comment.update(params[:comment].permit(:content))
         respond_to do |f|
             if (@comment.save) 
-                f.html { redirect_to @post, notice: "Comment edited!" }
+                f.html { redirect_to "", notice: "Comment edited!" }
             elsif
                 f.html { redirect_to "", notice: "Error: Your Comment is the same!." }
            else

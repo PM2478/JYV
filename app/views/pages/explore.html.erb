@@ -73,15 +73,23 @@
             
 
              <div class="col-sm-12">
-                <p class="fontawe-links">                                
-                    <%= link_to Yes_post_path(@p.id), method: :put do %>
-                    <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
-                    <%= @p.get_upvotes.size %>
-                    <% end %>
-                    <%= link_to No_post_path(@p.id), method: :put do %>
-                    <i class="fa fa-arrow-down" aria-hidden="true">No</i>
-                    <%= @p.get_downvotes.size %>
-                    <% end %>     
+             <p class="fontawe-links">                                
+                   <%= link_to Yes_post_path(@p.id), method: :put do %>
+                   <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
+                   <%= @p.get_upvotes.size %>
+                   <% end %>
+                   <%= link_to No_post_path(@p.id), method: :put do %>
+                   <i class="fa fa-arrow-down" aria-hidden="true">No</i>
+                   <%= @p.get_downvotes.size %>
+                   <%=  line_chart [
+                                    {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
+                                    {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
+                                   ] %> 
+                   <% end %>
+                   <%= @p.comments.count%> Comments.
+                   <%= render 'comments/form' %> 
+                   <%= render 'comments/comment' %> 
+
                 </p>
              </div>  
         </div>

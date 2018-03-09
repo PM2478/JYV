@@ -80,3 +80,5 @@ gem 'therubyracer', platforms: :ruby
 gem "chartkick"
 gem 'groupdate'
 
+# for nested comments
+gem 'ancestry'

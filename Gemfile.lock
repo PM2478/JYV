@@ -47,6 +47,8 @@ GEM
     acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    ancestry (3.0.1)
+      activerecord (>= 3.2.0)
     arel (8.0.0)
     autoprefixer-rails (7.2.5)
       execjs
@@ -84,8 +86,6 @@ GEM
       warden (~> 1.2.3)
     erubi (1.7.0)
     execjs (2.7.0)
-    factory_girl (4.9.0)
-      activesupport (>= 3.0.0)
     ffi (1.9.18)
     ffi (1.9.18-x64-mingw32)
     font-awesome-sass (4.7.0)
@@ -227,6 +227,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.11.1)
+  ancestry
   bcrypt!
   bootstrap (~> 4.0.0.beta3)
   byebug
@@ -234,7 +235,6 @@ DEPENDENCIES
   chartkick
   coffee-rails (~> 4.2)
   devise
-  factory_girl (~> 4.5)
   font-awesome-sass
   groupdate
   jbuilder (~> 2.5)
