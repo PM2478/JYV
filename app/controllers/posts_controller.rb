@@ -30,7 +30,7 @@ class PostsController < ApplicationController
         @post.user_id = current_user.id # assign the post to the user who created it.
        
             if @post.save
-                redirect_to @post, notice: "Question created!" 
+                redirect_to "", notice: "Question created!" 
             else
                 redirect_to "", notice: "Error: Your Question has already been asked!." 
             end
