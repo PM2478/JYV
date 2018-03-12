@@ -28,7 +28,7 @@
           </div>
     </div>
     <div class="col-9">
-        <p>Questions.</p>
+        <p>Questions of users whom you follow.</p>
         <% for @p in @posts %>
       <div class="card">
         <div class="card-body">
@@ -54,13 +54,10 @@
                                      {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
                                     ] %> 
                     <% end %>
-                 <a href="#"> <i class="fa fa-reply" aria-hidden="true"></i></a>
-                 
-
-                 <a href="#"><i style="padding-left:42px;" class="fa fa-retweet" aria-hidden="true"></i>
-                 <a href="#"><i style="padding-left:42px;" class="fa fa-heart" aria-hidden="true"></i>
-                 <a href="#"><i style="padding-left:42px;" class="fa fa-envelope-o" aria-hidden="true"></i>
-                 <a href="">View conversation</a>
+                    <%= @p.comments.count%> Comments.
+                    <%= render 'comments/form' %> 
+                    <%= render 'comments/comment' %> 
+ 
               </p>
            </div>  
         </div>
