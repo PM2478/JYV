@@ -2,17 +2,16 @@
  <span><%= comment.user_id %></span>
  <div><%= comment.content %></div>
  <div><%= comment.created_at %></div>
- 
 
- <%= link_to up_votes_path(object:'Comment', id:comment.id) do %>
-  <i class="fa fa-thumbs-up" aria-hidden="true">Like</i>
-  <%= comment.get_upvotes.size %>
+   <%= link_to up_votes_path(object:'Comment', id:comment.id) do %>
+     <i class="fa fa-thumbs-up" aria-hidden="true">Like</i>
+     <%= comment.get_upvotes.size %>
    <% end %>
-
-   <%= link_to down_votes_path(object:'Comment', id:comment.id) do %>
+   <%= link_to down_votes_path(object:'Comment', id:comment.id) do  %>
      <i class="fa fa-thumbs-down" aria-hidden="true">Dislike</i>
      <%= comment.get_downvotes.size %>
-    <% end %>
+   <% end %>
+
 
     <% if current_user == comment.user %> 
       <%= link_to "Delete",[comment.post, comment], method: :delete, data: {confirm: "Are you sure?"} %>

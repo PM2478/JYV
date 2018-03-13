@@ -82,3 +82,5 @@ gem 'groupdate'
 
 # for nested comments
 gem 'ancestry'
+
+gem "paperclip", "~> 5.2.1"

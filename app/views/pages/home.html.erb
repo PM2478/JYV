@@ -8,8 +8,8 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <img src="/avatar.png" class="panel-image-preview" >
-           <h6><%= current_user.username %></h6>
+        <%= image_tag current_user.avatar.url %>
+        <h6><%= current_user.username %></h6>
            <h6>Followers</h6>
            <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.followers.count %></h6>
           </div>
@@ -33,7 +33,7 @@
       <div class="card">
         <div class="card-body">
             <div>
-            <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
+            <%= image_tag current_user.avatar.url(:medium) %>
             </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
