@@ -7,7 +7,6 @@
 <div class="jumbotron jumbotron-fluid" style="position:relative; ">
     <img src="/jetty.jpg" class="panel-image-preview"style="position:absolute; top:0; bottom:0;" >
     <%= image_tag current_user.avatar.url %>
-    <h1 class="display-3"><%= current_user.username %></h1>
     <p class="lead"></p>
 </div>
 
@@ -35,7 +34,6 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-        <%= image_tag current_user.avatar.url %>
         <h6><%= current_user.username %></h6>
            <h6>Followers</h6>
            <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.followers.count %></h6>
@@ -61,10 +59,7 @@
         <% for @p in @posts %>
       <div class="card">
         <div class="card-body">
-             <div>
-             <%= image_tag current_user.avatar.url(:medium) %>
-             </div>
-             <div class="col-sm-11">
+            <div class="col-sm-11">
                 <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
                 
                 <%= link_to  @p.content, @p %>
@@ -87,7 +82,8 @@
                                    ] %> 
                    <% end %>
                    <%= @p.comments.count%> Comments.
-                   <%= render 'comments/form' %> 
+                   <br>
+                   <br>
                    <%= render 'comments/comment' %> 
 
                  

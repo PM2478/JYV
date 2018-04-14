@@ -32,9 +32,6 @@
         <% for @p in @posts %>
       <div class="card">
         <div class="card-body">
-            <div>
-            <%= image_tag current_user.avatar.url(:medium) %>
-            </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
               <p class="post-content"><%= @p.content %></p>
