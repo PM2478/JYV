@@ -17,13 +17,12 @@
         <div class="card-body"> 
             <h5 style="color: grey; font-size: 125%;">Explore</h5>
             <p style="opacity: 0.5; font-size: 90%;">
-              This page aggregates posts from ALL users. This means that you can find new people to follow,
-              and your posts will also appear here so other people can see your opinions and interests and follow you
-              if they chose.
+              This page has posts from All users, including your own.              if they chose.
             </p>
           </div>
        </div>
-
+    <br>
+    <br>
             
      <div>
      <%= render '/components/post_form' %>
@@ -82,13 +81,8 @@
                                    ] %> 
                    <% end %>
                    <%= @p.comments.count%> Comments.
-                   <br>
-                   <br>
                    <%= render 'comments/comment' %> 
-
-                 
-                  
-                  
+                   <%= render 'comments/form' %>                          
                 </p>
              </div>  
         </div>
