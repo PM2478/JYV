@@ -16,8 +16,12 @@ class PostsController < ApplicationController
     #upvote_from user
     #downvote_from user
     def upvote     
-        @post.upvote_from current_user
-        redirect_back(fallback_location: root_path)
+        if @post.upvote_from current_user
+          respond_to do |format|
+            format.html {redirect_back(fallback_location: root_path)}
+            format.js
+          end
+        end
     end
 
     def downvote

@@ -84,3 +84,7 @@ gem 'groupdate'
 gem 'ancestry'
 
 gem "paperclip", "~> 5.2.1"
+
+gem 'pry'
+gem 'pry-rails', group: [:development, :test]
+
