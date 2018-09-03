@@ -15,7 +15,7 @@
  
  @import "font-awesome-sprockets";
  @import "font-awesome";
- 
+
 
  jumbotron {
     position: relative;
@@ -47,4 +47,8 @@ body {
 }
 .sign-up {
     
+}
+
+#comments-section {
+    display: none;
 }

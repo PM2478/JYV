@@ -1,1 +1,8 @@
-$("#upvotes_<%= @p.id %>").html("<%= j (render partial: 'pages/upvotes', locals: { post: @p} ) %>");
+
+
+<% if current_user.upvote? @p.id %>
+     $("upvoted").addClass('upvote');
+   <% else %>
+     $("upvoted"').removeClass('upvote');
+<% end %>
+

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
    before_action :set_post, only: [:upvote, :downvote]
-   
+   respond_to :js, :html, :json
+
     def new 
         @post = Post.new
     end
@@ -16,11 +17,9 @@ class PostsController < ApplicationController
     #upvote_from user
     #downvote_from user
     def upvote     
-        if @post.upvote_from current_user
-          respond_to do |format|
-            format.html {redirect_back(fallback_location: root_path)}
-            format.js
-          end
+        respond_to do |format|
+           format.json {@post.upvote_from current_user} 
+           redirect_back(fallback_location: root_path)
         end
     end
 
@@ -40,6 +39,8 @@ class PostsController < ApplicationController
             end
     end
     
+   
+
     
     private
     def post_params # allows certain data to be passed via form.
