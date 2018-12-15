@@ -17,10 +17,8 @@ class PostsController < ApplicationController
     #upvote_from user
     #downvote_from user
     def upvote     
-        respond_to do |format|
-           format.json {@post.upvote_from current_user} 
+           @post.upvote_from current_user
            redirect_back(fallback_location: root_path)
-        end
     end
 
     def downvote

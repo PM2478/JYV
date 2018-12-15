@@ -12,11 +12,13 @@
 //
 //= require jquery
 //= require jquery3
+//= require jquery_ujs
+//= require jquery.js
+//= require jquery.turbolinks
+//= require turbolinks
 //= require popper
 //= require bootstrap-sprockets
 //= require bootstrap
-//= require jquery_ujs
-//= require turbolinks
 //= require Chart.bundle
 //= require chartkick
 //= require rails-ujs

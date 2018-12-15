@@ -17,6 +17,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
+
       <div class="card">
         <div class="card-body"> 
             <h5 style="color: grey; font-size: 125%;">Explore</h5>
@@ -25,12 +26,13 @@
             </p>
           </div>
        </div>
+      
     <br>
     <br>
             
      <div>
-     <%= render '/components/post_form' %>
-    </div>
+       <%= render '/components/post_form' %>
+     </div>
 
 <div class="container">
   <div class="row">
@@ -60,50 +62,46 @@
     <div class="col-7">
         <p>Questions.</p>
         <% for @p in @posts %>
-      <div class="card">
-        <div class="card-body">
-            <div class="col-sm-11">
-                <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+          <div class="card">
+            <div class="card-body">
+               <div class="col-sm-11">
+                   <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
                 
-                <%= link_to  @p.content, @p %>
-            </div>            
+                   <%= link_to  @p.content, @p %>
+               </div>            
             
 
-            <div class="col-sm-12">
-              <div>
-                 <p class="fontawe-links">                                
+              <div class="col-sm-12"
+                <p class="fontawe-links">                                
                      <%= link_to Yes_post_path(@p.id),class: ".yes-btn", id: "upvoted", method: :put, remote: true  do %>
-                     <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
-                     <span class="votes-count" data-id="<%= @p.id %>">
-                     <%= @p.get_upvotes.size %>
-                     </span>
+                       <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
+                       <span class="votes-count" data-id="<%= @p.id %>">
+                          <%= @p.get_upvotes.size %>
+                       </span>
                      <% end %>
                      <%= link_to No_post_path(@p.id), method: :put do %>
-                     <i class="fa fa-arrow-down" aria-hidden="true">No</i>
-                     <%= @p.get_downvotes.size %>
+                       <i class="fa fa-arrow-down" aria-hidden="true">No</i>
+                       <%= @p.get_downvotes.size %>
+                       <% end %> 
                      <%=  line_chart [
                                     {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
                                     {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
                                    ] %> 
-                     <% end %>
-                   </p>
-                   
-                  <div id="comments-parent">
-                      <p>
-                        <%= link_to "Comments", "#", id: "comments-link", remote: true %>
-                        <%= @p.comments.count %>
-                      </p>
                      
-                      <section id= "comments-section" >
-                          <ol id="comments">
-                            <%= render 'comments/comment' %> 
-                          </ol>
-                             <%= render 'comments/form' %>   
-                      </section> 
-                  </div>
-                </div>
-            </div>                                     
-           </div>
+                </p>                
+                  
+                <p>
+                  <%= link_to "Comments", "#", id: "comments-link", remote: true %>
+                  <%= @p.comments.count %>
+                </p>
+                     
+                <section id= "comments-section" >
+                   <%= render 'comments/comment' %> 
+                   <%= render 'comments/form' %>   
+                </section>         
+              </div>  
+
+            </div>
           </div>
         <% end  %>
     </div>
@@ -118,7 +116,7 @@
         </div>
       </div>
     </div>
-   </div>
+   
 
         
    

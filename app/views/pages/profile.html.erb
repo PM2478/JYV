@@ -68,14 +68,19 @@
                                      {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
                                     ] %> 
                     <% end %>
-                    <%= @p.comments.count%> Comments.
-                   <%= render 'comments/form' %> 
-                      <%= render 'comments/comment' %>
-
-              </p>
+               </p>
+                 <%= link_to "Comments", "#", id: "comments-link", remote: true %>
+                 <%= @p.comments.count %>
+               <p>     
+                 <div id= "comments-section" >
+                   <%= render 'comments/comment' %> 
+                   <%= render 'comments/form' %>   
+                 </div>
+               </p>
            </div>  
         </div>
       </div>
+     
         <% end  %>
     </div>
     

@@ -1,3 +1,5 @@
+
+
 <a name="top"></a>
 
 <div>
@@ -18,7 +20,7 @@
        <div class="card">
          <div class="card-body">
              <p>Trends.</p>
-             <a href="">#Trend #1</a><br>
+             <a href="">#Trend #1</a><%= %><br>
                 <span style="color: grey;">31k Posts</span><br><br>
              <a href="">#Trend #2</a><br>
                 <span style="color: grey;">25k Posts</span><br><br>
@@ -39,33 +41,40 @@
             
            <div class="col-sm-12">
               <p class="fontawe-links">
-               <%= link_to Yes_post_path(@p.id), method: :put do %>
+                <%= link_to Yes_post_path(@p.id), method: :put do %>
                     <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
                     <%= @p.get_upvotes.size %>
-                    <% end %>
-                    <%= link_to No_post_path(@p.id), method: :put do %>
+                <% end %>
+                <%= link_to No_post_path(@p.id), method: :put do %>
                     <i class="fa fa-arrow-down" aria-hidden="true">No</i>
                     <%= @p.get_downvotes.size %>
+                <% end %>
+              
                     <%=  line_chart [
                                      {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
                                      {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
-                                    ] %> 
-                    <% end %>
-                    <%= @p.comments.count%> Comments.
-                    <%= render 'comments/form' %> 
-                   <%= render 'comments/comment' %> 
-  
- 
+                      ] %>                                     
               </p>
+              
            </div>  
         </div>
+        
       </div>
+      <%= link_to "Comments", "#", id: "comments-link", remote: true %>
+      <%= @p.comments.count %>
+      <p>
+               
+      <div id= "comments-section" >
+        <%= render 'comments/comment' %> 
+        <%= render 'comments/form' %>   
+      </div>
+    </p>
+
         <% end  %>
-    </div>
-    
+        
+    </div> 
+  
    
-  </div>
- 
 <div class = "row">
-<a href="#top">Back to top</a>
+  <a href="#top">Back to top</a>
 </div>
