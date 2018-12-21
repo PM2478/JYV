@@ -12,7 +12,11 @@ class PagesController < ApplicationController
       following.push(@f.id)
     end
 
+    if (current_user.following != nil)
     @posts = Post.where("user_id IN (?)", following)
+    else
+      puts ""
+    end
     @newPost = Post.new
   end
 

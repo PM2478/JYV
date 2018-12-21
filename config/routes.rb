@@ -10,6 +10,9 @@ Rails.application.routes.draw do
    end
 end
 
+resources :posts do
+end
+
 resources :votes, only: [] do
   get 'up', on: :collection
   get 'down', on: :collection

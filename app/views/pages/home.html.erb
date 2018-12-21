@@ -1,80 +1,81 @@
 
+<link 
+href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+rel="stylesheet"  type='text/css'>
+<!-- begin row 2. -->
 
 <a name="top"></a>
 
+      <div>
+        <%= render '/components/post_form' %>
+      </div>
+
 <div>
-  <%= render '/components/post_form' %>
-</div>
 <div class="container">
   <div class="row">
     <div class="col">
       <div class="card">
         <div class="card-body">
-        <%= image_tag current_user.avatar.url %>
         <h6><%= current_user.username %></h6>
            <h6>Followers</h6>
            <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.followers.count %></h6>
           </div>
         </div>
-      <br>
-       <div class="card">
-         <div class="card-body">
-             <p>Trends.</p>
-             <a href="">#Trend #1</a><%= %><br>
-                <span style="color: grey;">31k Posts</span><br><br>
-             <a href="">#Trend #2</a><br>
-                <span style="color: grey;">25k Posts</span><br><br>
-             <a href="">#Trend #3</a><br>
-             <span style="color: grey;">16k Posts</span><br><br>
-           </div>
-          </div>
-    </div>
-    <div class="col-9">
-        <p>Questions of users whom you follow.</p>
-        <% for @p in @posts %>
-      <div class="card">
-        <div class="card-body">
-            <div class="col-sm-11">
-              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= @p.content %></p>
-            </div>
-            
-           <div class="col-sm-12">
-              <p class="fontawe-links">
-                <%= link_to Yes_post_path(@p.id), method: :put do %>
-                    <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
-                    <%= @p.get_upvotes.size %>
-                <% end %>
-                <%= link_to No_post_path(@p.id), method: :put do %>
-                    <i class="fa fa-arrow-down" aria-hidden="true">No</i>
-                    <%= @p.get_downvotes.size %>
-                <% end %>
-              
-                    <%=  line_chart [
-                                     {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
-                                     {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
-                      ] %>                                     
-              </p>
-              
-           </div>  
-        </div>
-        
-      </div>
-      <%= link_to "Comments", "#", id: "comments-link", remote: true %>
-      <%= @p.comments.count %>
-      <p>
-               
-      <div id= "comments-section" >
-        <%= render 'comments/comment' %> 
-        <%= render 'comments/form' %>   
-      </div>
-    </p>
 
+      <br>
+      
+        <%= render '/components/trend' %>
+    
+    </div>
+
+    <div class="col-7">
+        <p>Questions.</p>
+        <% for @p in @posts %>
+          <div class="card">
+            <div class="card-body">
+               <div class="col-sm-11">
+                   <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+                
+                   <%= link_to  @p.content, @p %>
+               </div>            
+            
+
+              <div class="col-sm-12"
+                <p class="fontawe-links">                                
+                     <%= link_to Yes_post_path(@p.id),class: ".yes-btn", id: "upvoted", method: :put, remote: true  do %>
+                       <i class="fa fa-arrow-up" aria-hidden="true">Yes</i>
+                       <span class="votes-count" data-id="<%= @p.id %>">
+                          <%= @p.get_upvotes.size %>
+                       </span>
+                     <% end %>
+                     <%= link_to No_post_path(@p.id), method: :put do %>
+                       <i class="fa fa-arrow-down" aria-hidden="true">No</i>
+                       <%= @p.get_downvotes.size %>
+                       <% end %> 
+                     <%=  line_chart [
+                                    {name: "Yes", data: @p.get_upvotes.group_by_day(:created_at).count},
+                                    {name:  "No", data: @p.get_downvotes.group_by_day(:created_at).count}
+                                   ] %> 
+                     
+                </p>                
+                  
+                <p>
+                  <%= link_to "Comments", "#", id: "comments-link", remote: true %>
+                  <%= @p.comments.count %>
+                </p>
+                     
+                <section id= "comments-section" >
+                   <%= render 'comments/comment' %> 
+                   <%= render 'comments/form' %>   
+                </section>         
+              </div>  
+
+            </div>
+          </div>
         <% end  %>
-        
-    </div> 
-  
-   
+    </div>
+</div>
+
 <div class = "row">
   <a href="#top">Back to top</a>
 </div>

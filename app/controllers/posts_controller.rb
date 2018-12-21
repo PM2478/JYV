@@ -2,6 +2,10 @@ class PostsController < ApplicationController
    before_action :set_post, only: [:upvote, :downvote]
    respond_to :js, :html, :json
 
+   def index
+    @post = Post.all
+   end
+   
     def new 
         @post = Post.new
     end
@@ -37,7 +41,7 @@ class PostsController < ApplicationController
             end
     end
     
-   
+    
 
     
     private
